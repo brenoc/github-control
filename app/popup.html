@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>        
+  <!-- bower:css -->
+  <!-- endbower -->
+
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+  <!-- build:css styles/main.css -->
+  <link href="styles/main.css" rel="stylesheet">
+  <!-- endbuild -->
+
+  <!-- bower:js -->
+  <!-- endbower -->
+
+  <!-- build:js scripts/libs.js -->
+  <script src="scripts/libs/base64.js"></script>
+  <script src="scripts/libs/underscore-min.js"></script>
+  <script src="scripts/libs/github.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/bootstrap.js"></script>
+  <!-- endbuild -->
+  <!-- build:js scripts/popup.js -->
+  <script src="scripts/popup.js"></script>
+  <!-- endbuild -->
+</head>
+<body class="container" style="width:300px;">
+  
+  <script src="scripts/oauth.js"></script>  
+  <div id="user_info"></div>
+  <button id="signin" style="display:none">Sign in</button>
+  <button id="revoke" style="display:none">Revoke token</button>
+  <br><b>Your repos:</b> <br>
+  <textarea id="user_repos" style="width: 95%; min-height: 200px"></textarea>
+
+</body>
+</html>

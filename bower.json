@@ -1,0 +1,8 @@
+{
+  "name": "github-control",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  },
+  "devDependencies": {}
+}
