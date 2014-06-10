@@ -10,13 +10,7 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": [
-      "scripts/chromereload.js",
-      "scripts/background.js",
-      "scripts/libs/base64.js",
-      "scripts/libs/underscore-min.js",
-      "scripts/libs/github.js"
-    ]
+    "page": "background.html"
   },
   "options_page": "options/index.html",
   "browser_action": {

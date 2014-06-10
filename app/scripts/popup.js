@@ -2,16 +2,17 @@
 
 console.log('\'Allo \'Allo! Popup');
 
-var github = new Github({
-	username: "brenoc",
-	password: "159357gh",
-	auth: "basic"
+var background = chrome.extension.getBackgroundPage();
+
+background.auth.then(function(){
+  var github = background.github;
+  var user = github.getUser();
+
+  user.repos(function(err, repos) {
+    for (var i = repos.length - 1; i >= 0; i--) {
+      $('#repos').append("<li>"+repos[i].name);
+    };
+  });
+
+  chrome.browserAction.setBadgeText({text: '\'Opa'});
 });
-
-var repo = github.getRepo("brenoc", "opentracks");
-
-repo.show(function(err, repo) {
-	console.log(repo);
-});
-
-chrome.browserAction.setBadgeText({text: '\'Opa'});
