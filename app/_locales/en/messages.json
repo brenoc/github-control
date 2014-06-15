@@ -6,5 +6,16 @@
   "appDescription": {
     "message": "GitHub control",
     "description": "The description of the application"
+  },
+  "oAuthRequired": {
+    "message": "oAuth is required",
+    "description": "Validation message"
+  },
+  "requiresOAuth": {
+    "message": "You need to oAuth $1 at GitHub first",
+    "description": "Tell user that he needs to auth"
+  },
+  "newNotifications": {
+    "message": "You have $1 unread notification(s)"
   }
 }

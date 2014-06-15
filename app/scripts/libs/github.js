@@ -120,8 +120,11 @@
       // List authenticated user's unread notifications
       // -------
 
-      this.notifications = function(cb) {
-        _request("GET", "/notifications", null, function(err, res) {
+      this.notifications = function(param, cb) {
+        if (!param) {
+          param = '';
+        }
+        _request("GET", "/notifications"+param, null, function(err, res) {
           cb(err,res);
         });
       };

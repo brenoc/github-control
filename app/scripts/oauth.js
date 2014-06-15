@@ -14,6 +14,8 @@ var gh = (function() {
                       '.chromiumapp.org/provider_cb';
     var redirectRe = new RegExp(redirectUri + '[#\?](.*)');
 
+    var scope = ['repo:status', 'notifications'].join();
+
     var access_token = null;
 
     return {
@@ -26,9 +28,9 @@ var gh = (function() {
 
         var options = {
           'interactive': interactive,
-          url:'https://github.com/login/oauth/authorize?client_id=' + clientId +
-              '&reponse_type=token' +
-              '&access_type=online' +
+          url:'https://github.com/login/oauth/authorize?' +
+              'client_id=' + clientId +
+              '&scope=' + scope +
               '&redirect_uri=' + encodeURIComponent(redirectUri)
         }
         chrome.identity.launchWebAuthFlow(options, function(redirectUri) {
@@ -65,7 +67,7 @@ var gh = (function() {
         }
 
         function handleProviderResponse(values) {
-          console.log('providerResponse', values);
+          //console.log('providerResponse', values);
           if (values.hasOwnProperty('access_token'))
             setAccessToken(values.access_token);
           // If response does not have an access_token, it might have the code,
@@ -91,7 +93,7 @@ var gh = (function() {
             // can be easily parsed to an object.
             if (this.status === 200) {
               var response = JSON.parse(this.responseText);
-              console.log(response);
+              // console.log(response);
               if (response.hasOwnProperty('access_token')) {
                 setAccessToken(response.access_token);
               } else {
@@ -107,7 +109,8 @@ var gh = (function() {
 
         function setAccessToken(token) {
           access_token = token; 
-          console.log('Setting access_token: ', access_token);
+          // Prints the oAuth token
+          // console.log('Setting access_token: ', access_token);
           callback(null, access_token);
         }
       },

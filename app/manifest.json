@@ -26,5 +26,8 @@
     "storage",
     "identity",
     "https://github.com/"
+  ],
+  "web_accessible_resources": [
+    "images/icon-48.png"
   ]
 }
