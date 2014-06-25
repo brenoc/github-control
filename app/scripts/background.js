@@ -2,21 +2,39 @@
 
 window.github = null;
 
+var setupGithub = function(token) {
+  window.github = new Github({
+    token: token,
+    auth: "oauth"
+  });
+};
+
 var auth = function() {
   var authDeferred = function() {
     var defer = $.Deferred();
-    gh.tokenFetcher.getToken(true, function(error, token) { 
-      if (error) {
-        return defer.reject(error);
+
+    // Check if we already have the token
+    chrome.storage.local.get("token", function(data) {
+      if (data && data["token"]) {
+        // Yes, we do
+        setupGithub(data["token"]);
+        return defer.resolve();
       }
 
-      window.github = new Github({
-        token: token,
-        auth: "oauth"
-      });
+      // No, we don't. Go get it!
+      gh.tokenFetcher.getToken(true, function(error, token) {
+        if (error) {
+          return defer.reject(error);
+        }
 
-      return defer.resolve();
+        // Keep it for later
+        chrome.storage.local.set({"token": token}, function() {
+          setupGithub(token);
+          return defer.resolve();
+        });
+      });
     });
+
     return defer;
   }();
 
@@ -112,7 +130,11 @@ var setNotificationInterval = function(){
 
 };
 
-chrome.runtime.onInstalled.addListener(function (details) {
+chrome.runtime.onInstalled.addListener(function(details) {
   console.log('previousVersion', details.previousVersion);
+  auth();
+});
+
+chrome.runtime.onStartup.addListener(function() {
   auth();
 });
