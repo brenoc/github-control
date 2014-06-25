@@ -30,10 +30,15 @@ var happyPath = function() {
   chrome.storage.local.get(['repos'], function(data) {
     var repos = [];
     if (data) {
-      var repos = data['repos']
+      var repos = data['repos'];
     }
     _.each(repos, function(repo){
-      $('#repos').append("<li class='list-group-item'>"+repo.name);
+      console.log(repo);
+      var html = '';
+      html += '<li class="list-group-item">';
+      html += '<a href="'+repo.html_url+'" target="_blank">'+repo.name+'</a>';
+      html += '</li>'
+      $('#repos').append(html);
     });
   });
 
