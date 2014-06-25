@@ -1,3 +1,7 @@
+body {
+	widht: 300px;
+}
+
 body > .container {
 	margin: 60px 15px 0;
 }
